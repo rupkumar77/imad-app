@@ -10,18 +10,52 @@ var articleone= {
     heading:'Article One',
     date: 'Sep 20, 2017',
     content: `
-    <p> 
-               Files on the sidebar represent the source code of your web app. These files are all actually saved in a git repository on your github account. This console allows you to edit these files, deploy your app, and save these files back to your github repository.
-            </p>
             <p> 
                Files on the sidebar represent the source code of your web app. These files are all actually saved in a git repository on your github account. This console allows you to edit these files, deploy your app, and save these files back to your github repository.
             </p>
             <p> 
                Files on the sidebar represent the source code of your web app. These files are all actually saved in a git repository on your github account. This console allows you to edit these files, deploy your app, and save these files back to your github repository.
             </p>
-    `
+            <p> 
+               Files on the sidebar represent the source code of your web app. These files are all actually saved in a git repository on your github account. This console allows you to edit these files, deploy your app, and save these files back to your github repository.
+            </p>
+            `
 };
-
+function createTemplate (data){
+    var title= data.title;
+    var heading = data.heading;
+    var date = data.date;
+    var content= data.content;
+var htmlTemplate= `
+<!DOCTYPE html>
+    <head>
+        <title>
+            Article-One
+        </title>
+        <meta name="viewport" content="width-device-width, initial-scale=1"/>
+        <link href="/ui/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+        <div>
+            <a href="/">Home</a>
+        </div>
+        <hr>
+        <h3>
+        ${heading}
+        </h3>
+        <div>
+            ${date}
+        </div>
+        <div>
+           ${content}
+        </div>
+        </div>
+    </body>
+</html>
+`;
+return htmlTemplate;
+}
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -31,7 +65,7 @@ app.get('/ui/style.css', function (req, res) {
 });
 
 app.get('/article-one', function (req, res){
-  res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));  
+  res.send(createTemplate(articleone));
 }); 
 
 app.get('/article-two', function (req, res){
