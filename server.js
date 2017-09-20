@@ -5,7 +5,8 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleone= {
+var articles= {
+    'article-one':{
     title:'Article One | Firse Web',
     heading:'Article One',
     date: 'Sep 20, 2017',
@@ -18,9 +19,27 @@ var articleone= {
             </p>
             <p> 
                Files on the sidebar represent the source code of your web app. These files are all actually saved in a git repository on your github account. This console allows you to edit these files, deploy your app, and save these files back to your github repository.
-            </p>
-            `
+            </p>`
+},
+    'article-two':  {
+    title:'Article Two | First Web',
+    heading:'Article Tne',
+    date: 'Sep 21, 2017',
+    content: `
+            <p> 
+               This is the content for my second article.
+            </p>`
+    },
+    'article-three':{
+    title:'Article Three | Firse Web',
+    heading:'Article Three',
+    date: 'Sep 22, 2017',
+    content: `
+            <p> 
+               This is the content for my Third article.
+            </p>`}
 };
+
 function createTemplate (data){
     var title= data.title;
     var heading = data.heading;
@@ -64,17 +83,18 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-app.get('/article-one', function (req, res){
-  res.send(createTemplate(articleone));
+app.get('/:articleName', function (req, res){
+    //articleName == article-one
+    // articles[articleName]== {} content object for article one 
+  var articleName= req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 }); 
 
-app.get('/article-two', function (req, res){
- res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));   
-}); 
 
-app.get('/article-three', function (req, res){
- res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));   
-}); 
+app.get('/ui/style.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+});
+
 
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
