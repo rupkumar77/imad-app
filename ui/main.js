@@ -19,6 +19,6 @@ button.onclick=function(){
     }  
   };
   // Make the request
-  request.open('GET', 'http://rupkumar77.imad.hasura-app.io/counter', true)
+  request.open('GET', "http://rupkumar77.imad.hasura-app.io/counter", true)
   request.send(null);
 };
